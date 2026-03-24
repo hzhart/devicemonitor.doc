@@ -1,0 +1,413 @@
+# 数据推送平台接口协议
+
+## 适合范围
+-------------------------
+` 本API提供推送数据至第三方平台`
+
+
+## 请求语法
+-------------------------
+`
+HttpMethod / HTTP/1.1
+Host: $host
+Content-Type: application/json;
+`
+
+## 支持的认证方式
+-------------------------
+`
+HTTP Basic Auth
+`
+
+## 推送数据
+-------------------------
+
+> 推送数据到第三方平台
+
+```
+POST /url(自定义)
+```
+
+> 参数
+<table>
+    <tr>
+        <th style="width:150px;">名称</th>
+        <th style="width:60px;">类型</th>
+        <th style="width:200px;">说明</th>
+        <th>备注</th>
+    </tr>
+    <tr>
+        <td>type</td>
+        <td>string</td>
+        <td>数据类型</td>
+        <td>alarm: 告警 data: 设备数据</td>
+    </tr>
+    <tr>
+        <td>data</td>
+        <td>array</td>
+        <td>推送的数据</td>
+        <td>数据格式据其类型, 参见下面的表格</td>
+    </tr>
+</table>
+
+## 告警记录(alarm)
+-------------------------
+
+<table>
+    <tr>
+        <th style="width:150px;">属性名称</th>
+        <th style="width:60px;">类型</th>
+        <th style="width:200px;">说明</th>
+        <th>备注</th>
+    </tr>
+    <tr>
+        <td>area</td>
+        <td>string</td>
+        <td>区域</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>stationId</td>
+        <td>int</td>
+        <td>站点ID</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>stationName</td>
+        <td>string</td>
+        <td>站点名称</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>commNo</td>
+        <td>string</td>
+        <td>通讯编号</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>occurrenceType</td>
+        <td>string</td>
+        <td>告警触发类型</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>alarmTypeName</td>
+        <td>string</td>
+        <td>告警类型名称</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>alarmTypeContent</td>
+        <td>json</td>
+        <td>告警类型</td>
+        <td>[{"text":"告警内容","color":"颜色"}]</td>
+    </tr>
+    <tr>
+        <td>extraData</td>
+        <td>float</td>
+        <td>告警数据</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>recover</td>
+        <td>int</td>
+        <td>已恢复: 1 未恢复: 0</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>timestamp</td>
+        <td>int</td>
+        <td>产生时间(戳)</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>platform_data_id</td>
+        <td>string</td>
+        <td>平台数据ID,唯一</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>createdAt</td>
+        <td>int</td>
+        <td>接收时间(戳)</td>
+        <td>-</td>
+    </tr>   
+</table>
+
+## 设备数据(data)
+-------------------------
+
+<table>
+    <tr>
+        <th style="width:150px;">属性名称</th>
+        <th style="width:60px;">类型</th>
+        <th style="width:200px;">说明</th>
+        <th>备注</th>
+    </tr>
+    <tr>
+        <td>area</td>
+        <td>string</td>
+        <td>区域</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>stationId</td>
+        <td>int</td>
+        <td>站点ID</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>stationName</td>
+        <td>string</td>
+        <td>站点名称</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>commNo</td>
+        <td>string</td>
+        <td>通讯编号</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>funCode</td>
+        <td>int</td>
+        <td>功能码</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>temperature</td>
+        <td>float</td>
+        <td>温度</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>pipePressure</td>
+        <td>float</td>
+        <td>管道压力</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>pipePressure</td>
+        <td>float</td>
+        <td>大气压力</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>voltage</td>
+        <td>decimal</td>
+        <td>电池电压</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>signal</td>
+        <td>int</td>
+        <td>信号强度</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>pressureUploadType</td>
+        <td>int</td>
+        <td>压力上传类型</td>
+        <td>1: 绝压上传 0: 表压上传</td>
+    </tr>
+    <tr>
+        <td>netParam</td>
+        <td>int</td>
+        <td>网络参数</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>concentration</td>
+        <td>float</td>
+        <td>燃气浓度</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>ppValue</td>
+        <td>float</td>
+        <td>通电电位</td>
+        <td>单位: V 设备：7: 智能阴极保存测试桩</td>
+    </tr>
+    <tr>
+        <td>cpValue</td>
+        <td>float</td>
+        <td>断电电位</td>
+        <td>单位: V 设备：7: 智能阴极保存测试桩</td>
+    </tr>
+    <tr>
+        <td>apValue</td>
+        <td>float</td>
+        <td>交流电压</td>
+        <td>单位: V 设备：7: 智能阴极保存测试桩</td>
+    </tr>
+    <tr>
+        <td>npValue</td>
+        <td>float</td>
+        <td>自然电流</td>
+        <td>单位: V 设备：7: 智能阴极保存测试桩</td>
+    </tr>
+    <tr>
+        <td>dcValue</td>
+        <td>float</td>
+        <td>直流电流</td>
+        <td>单位: mA 设备：7: 智能阴极保存测试桩</td>
+    </tr>
+    <tr>
+        <td>ddValue</td>
+        <td>float</td>
+        <td>直流电流密度</td>
+        <td>单位: A/㎡ 设备：7: 智能阴极保存测试桩</td>
+    </tr>
+    <tr>
+        <td>acValue</td>
+        <td>float</td>
+        <td>交流电流</td>
+        <td>单位: mA 设备：7: 智能阴极保存测试桩</td>
+    </tr>
+    <tr>
+        <td>adValue</td>
+        <td>float</td>
+        <td>交流电流密度</td>
+        <td>单位: A/㎡ 设备：7: 智能阴极保存测试桩</td>
+    </tr>
+    <tr>
+        <td>aopValue</td>
+        <td>float</td>
+        <td>阳极开路电位</td>
+        <td>单位: V 设备：7: 智能阴极保存测试桩</td>
+    </tr>
+    <tr>
+        <td>aocValue</td>
+        <td>float</td>
+        <td>阳极输出电流</td>
+        <td>单位: mA 设备：7: 智能阴极保存测试桩</td>
+    </tr>
+    <tr>
+        <td>cpsState</td>
+        <td>string</td>
+        <td>ok: 正常 overprotection: 过保护 underprotection: 欠保护 设备：7: 智能阴极保存测试桩</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>dbsState</td>
+        <td>string</td>
+        <td>ok: 正常 interfering: 干扰 设备：7: 智能阴极保存测试桩</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>timestamp</td>
+        <td>int</td>
+        <td>产生时间(戳)</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>createdAt</td>
+        <td>int</td>
+        <td>接收时间(戳)</td>
+        <td>-</td>
+    </tr>   
+</table>
+
+#### 地埋式可燃气体监测装置 状态
+<table>
+    <tr>
+        <td>statusPressureMalfunction</td>
+        <td>int</td>
+        <td>压力故障状态</td>
+        <td>1: 告警 0: 正常</td>
+    </tr>
+    <tr>
+        <td>statusTemperatureMalfunction</td>
+        <td>int</td>
+        <td>温度故障状态</td>
+        <td>1: 告警 0: 正常</td>
+    </tr>
+    <tr>
+        <td>statusAbsolutePressureUpload</td>
+        <td>int</td>
+        <td>绝压上传状态</td>
+        <td>1: 绝压上传 0: 表压上传</td>
+    </tr>
+    <tr>
+        <td>statusPressureUpperLimit</td>
+        <td>int</td>
+        <td>压力高报状态</td>
+        <td>1: 告警 0: 正常</td>
+    </tr>
+    <tr>
+        <td>statusPressureLowerLimit</td>
+        <td>int</td>
+        <td>压力低报状态</td>
+        <td>1: 告警 0: 正常</td>
+    </tr>
+    <tr>
+        <td>statusTemperatureUpperLimit</td>
+        <td>int</td>
+        <td>温度高报状态</td>
+        <td>1: 告警 0: 正常</td>
+    </tr>
+    <tr>
+        <td>statusTemperatureLowerLimit</td>
+        <td>int</td>
+        <td>温度低报状态</td>
+        <td>1: 告警 0: 正常</td>
+    </tr>
+    <tr>
+        <td>statusVoltageLowerLimit</td>
+        <td>int</td>
+        <td>电压低报状态</td>
+        <td>1: 告警 0: 正常</td>
+    </tr>
+    <tr>
+        <td>statusConcentrationLevel1</td>
+        <td>int</td>
+        <td>泄漏一级告警</td>
+        <td>1: 告警 0: 正常</td>
+    </tr>
+    <tr>
+        <td>statusConcentrationLevel2</td>
+        <td>int</td>
+        <td>泄漏二级告警</td>
+        <td>1: 告警 0: 正常</td>
+    </tr>
+    <tr>
+        <td>statusLiquidLevel</td>
+        <td>int</td>
+        <td>液位告警</td>
+        <td>1: 告警 0: 正常</td>
+    </tr>
+    <tr>
+        <td>statusSewercoverOpen</td>
+        <td>int</td>
+        <td>井盖开盖告警</td>
+        <td>1: 告警 0: 正常</td>
+    </tr>
+    <tr>
+        <td>statusConcentrationSensor</td>
+        <td>int</td>
+        <td>浓度传感器故障</td>
+        <td>1: 告警 0: 正常</td>
+    </tr>
+</table>
+
+#### 智能阴极保护测试桩 状态
+<table>
+    <tr>
+        <td>batteryLow</td>
+        <td>int</td>
+        <td>电池电压低</td>
+        <td>1: 电压低 0: 正常</td>
+    </tr>
+    <tr>
+        <td>collectError</td>
+        <td>int</td>
+        <td>采集故障</td>
+        <td>1: 故障 0: 正常</td>
+    </tr>
+    <tr>
+        <td>locationError</td>
+        <td>int</td>
+        <td>最近一次定位失败</td>
+        <td>1: 失败 0: 正常</td>
+    </tr>
+</table>
