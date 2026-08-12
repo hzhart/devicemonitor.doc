@@ -41,15 +41,15 @@
         <td>-</td>
     </tr>
     <tr>
-        <td>经度</td>
-        <td>decimal</td>
         <td>lon</td>
+        <td>decimal</td>
+        <td>经度</td>
         <td>-</td>
     </tr>
     <tr>
-        <td>纬度</td>
-        <td>decimal</td>
         <td>lat</td>
+        <td>decimal</td>
+        <td>纬度</td>
         <td>-</td>
     </tr>    
     <tr>
